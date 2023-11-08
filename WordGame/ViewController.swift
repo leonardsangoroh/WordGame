@@ -81,34 +81,39 @@ class ViewController: UITableViewController {
         let errorTitle: String
         let errorMessage: String
         
-        if isLong(word: lowerAnswer) {
-            if isPossible(word: lowerAnswer) {
-                if isOriginal(word: lowerAnswer) {
-                    if isReal(word: lowerAnswer) {
-                        usedWords.insert(answer, at:0)
-                        
-                        ///insert row into table view
-                        let indexPath = IndexPath(row: 0, section: 0)
-                        /// the with parameter lets you specify how the row should be animated in. Whenever you're adding and removing things from a table, the .automatic value means "do whatever is the standard system animation for this change." In this case, it means "slide the new row in from the top."
-                        tableView.insertRows(at: [indexPath], with: .automatic)
-                        
-                        return
+        if isTitle(word: lowerAnswer) {
+            if isLong(word: lowerAnswer) {
+                if isPossible(word: lowerAnswer) {
+                    if isOriginal(word: lowerAnswer) {
+                        if isReal(word: lowerAnswer) {
+                            usedWords.insert(answer, at:0)
+                            
+                            ///insert row into table view
+                            let indexPath = IndexPath(row: 0, section: 0)
+                            /// the with parameter lets you specify how the row should be animated in. Whenever you're adding and removing things from a table, the .automatic value means "do whatever is the standard system animation for this change." In this case, it means "slide the new row in from the top."
+                            tableView.insertRows(at: [indexPath], with: .automatic)
+                            
+                            return
+                        } else {
+                            errorTitle = "Word not recognised"
+                            errorMessage = "You can't just make them"
+                        }
                     } else {
-                        errorTitle = "Word not recognised"
-                        errorMessage = "You can't just make them"
+                        errorTitle = "Word used already"
+                        errorMessage = "Be more original!"
                     }
                 } else {
-                    errorTitle = "Word used already"
-                    errorMessage = "Be more original!"
+                    guard let title = title?.lowercased() else {return}
+                    errorTitle = "Word not Possible"
+                    errorMessage = "You can't spell that word from \(title)"
                 }
             } else {
-                guard let title = title?.lowercased() else {return}
-                errorTitle = "Word not Possible"
-                errorMessage = "You can't spell that word from \(title)"
+                errorTitle = "Word too short"
+                errorMessage = "Make it longer"
             }
         } else {
-            errorTitle = "Word too short"
-            errorMessage = "Make it longer"
+            errorTitle = "No Way!"
+            errorMessage = "You can't just repeat the word"
         }
         
         let ac = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
@@ -164,10 +169,13 @@ class ViewController: UITableViewController {
         }
         return true
     }
-//
-//    func isTitle() {
-//
-//    }
+
+    func isTitle(word:String) -> Bool {
+        if word != title {
+            return true
+        }
+        return false
+    }
 
 
 }
