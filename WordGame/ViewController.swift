@@ -88,48 +88,50 @@ class ViewController: UITableViewController {
     func submit (_ answer: String) {
         let lowerAnswer = answer.lowercased()
         
-        let errorTitle: String
-        let errorMessage: String
-        
-        if isTitle(word: lowerAnswer) {
-            if isLong(word: lowerAnswer) {
-                if isPossible(word: lowerAnswer) {
-                    if isOriginal(word: lowerAnswer) {
-                        if isReal(word: lowerAnswer) {
-                            usedWords.insert(answer, at:0)
-                            
-                            ///insert row into table view
-                            let indexPath = IndexPath(row: 0, section: 0)
-                            /// the with parameter lets you specify how the row should be animated in. Whenever you're adding and removing things from a table, the .automatic value means "do whatever is the standard system animation for this change." In this case, it means "slide the new row in from the top."
-                            tableView.insertRows(at: [indexPath], with: .automatic)
-                            
-                            return
-                        } else {
-                            errorTitle = "Word not recognised"
-                            errorMessage = "You can't just make them"
-                        }
-                    } else {
-                        errorTitle = "Word used already"
-                        errorMessage = "Be more original!"
-                    }
-                } else {
-                    guard let title = title?.lowercased() else {return}
-                    errorTitle = "Word not Possible"
-                    errorMessage = "You can't spell that word from \(title)"
-                }
-            } else {
-                errorTitle = "Word too short"
-                errorMessage = "Make it longer"
-            }
-        } else {
-            errorTitle = "No Way!"
-            errorMessage = "You can't just repeat the word"
+        guard isTitle(word: lowerAnswer) else {
+            
+           return showErrorMessage(title: "No Way!", message: "You can't just repeat the word")
+
+        }
+        guard isLong(word: lowerAnswer) else {
+            
+           return showErrorMessage(title: "Word too short", message: "Make it longer")
+            
+        }
+        guard isPossible(word: lowerAnswer) else {
+            
+            guard let title = title?.lowercased() else {return}
+            return showErrorMessage(title: "Word not Possible", message: "You can't spell that word from \(title)")
+        }
+        guard isOriginal(word: lowerAnswer) else {
+            
+            return showErrorMessage(title: "Word used already", message: "Be more original!")
+
+        }
+        guard isReal(word: lowerAnswer) else {
+            
+            return showErrorMessage(title: "Word not recognised", message: "You can't just make them")
+
         }
         
-        let ac = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        present(ac, animated: true)
+        usedWords.insert(answer, at:0)
+                            
+        ///insert row into table view
+        let indexPath = IndexPath(row: 0, section: 0)
+        /// the with parameter lets you specify how the row should be animated in. Whenever you're adding and removing things from a table, the .automatic value means "do whatever is the standard system animation for this change." In this case, it means "slide the new row in from the top."
+        tableView.insertRows(at: [indexPath], with: .automatic)
+        return
     }
+    
+    func showErrorMessage(title: String, message: String) {
+           let errorTitle = title
+           let errorMessage = message
+
+           let ac = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
+           ac.addAction(UIAlertAction(title: "OK", style: .default))
+           present(ac, animated: true)
+     }
+
     
     func isPossible(word: String) -> Bool {
         guard var tempWord = title?.lowercased() else {return false}
@@ -186,7 +188,5 @@ class ViewController: UITableViewController {
         }
         return false
     }
-
-
 }
 
