@@ -20,9 +20,6 @@ The app was built thanks to 100 days of Swift course. On days 27,28, and 29, Pau
 - utf16.count (used when working with Apple frameworks)
 - .count (used with other methods)
 
-# The following features/concepts were later built on top of the App
-
-
 ## Screenshot(s) of the application
 
 
@@ -66,3 +63,26 @@ The app was built thanks to 100 days of Swift course. On days 27,28, and 29, Pau
 
 ### Screenshot 7.2 - getting output
 <img width="470" alt="Screenshot 2023-11-05 at 00 02 58" src="https://github.com/leonardsangoroh/WordGame/assets/61079370/344ade6a-3fc0-4069-b7b5-46d7faa227aa">
+
+## Section 8 - Checking if word is same as the set word
+
+### Section 8.1 - Typing same word as the set word
+<img width="466" alt="Screenshot 2023-11-08 at 19 16 45" src="https://github.com/leonardsangoroh/WordGame/assets/61079370/746b8e48-a848-413c-8c13-796696bd2595">
+
+### Section 8.2 - Error message
+<img width="466" alt="Screenshot 2023-11-08 at 19 16 56" src="https://github.com/leonardsangoroh/WordGame/assets/61079370/715d6201-9e1c-449c-b3e7-88f1ee192dc1">
+
+## Section 9 - Checking if word has 3 or more letters
+
+### Section 9.1 - Typing a 3-letter word
+<img width="466" alt="Screenshot 2023-11-08 at 15 01 21" src="https://github.com/leonardsangoroh/WordGame/assets/61079370/07b8b41e-846d-4766-821b-fb4daa23fa6d">
+
+### Section 9.2 - Error message
+<img width="466" alt="Screenshot 2023-11-08 at 15 01 32" src="https://github.com/leonardsangoroh/WordGame/assets/61079370/5d32526c-1a23-4014-a8d4-a20a0bead840">
+
+## Screen-recording - 'Restart Game' button added
+
+
+https://github.com/leonardsangoroh/WordGame/assets/61079370/d0199e0c-18cf-4308-a4e6-29a35c2dc4b6
+
+
