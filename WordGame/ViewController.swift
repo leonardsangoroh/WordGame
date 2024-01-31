@@ -44,10 +44,7 @@ class ViewController: UITableViewController {
     }
     
     func startGame() {
-        /// Set View controller title to be a random word in the array (the word the player has to find)
-        title = allWords.randomElement()
-        /// Removes all values from the usedWords array
-        usedWords.removeAll(keepingCapacity: true)
+        loadPreviousState()
         tableView.reloadData()
     }
     
@@ -81,6 +78,7 @@ class ViewController: UITableViewController {
         }
         
         ac.addAction(submitAction)
+        saveStatus()
         present(ac, animated: true)
     }
     
@@ -187,6 +185,28 @@ class ViewController: UITableViewController {
             return true
         }
         return false
+    }
+    
+    func saveStatus() {
+        let defaults = UserDefaults.standard
+        
+        let arrayOfUsedWords = usedWords
+        defaults.set(arrayOfUsedWords, forKey: "savedUsedWords")
+        
+        let saveTitle = title
+        defaults.set(saveTitle, forKey: "savedTitle")
+        
+        print("status saved")
+    }
+    
+    func loadPreviousState(){
+        let defaults = UserDefaults.standard
+        
+        if let savedArray = defaults.object(forKey: "savedUsedWords") as? [String] {
+            usedWords = savedArray
+        }
+        
+        title = defaults.string(forKey: "savedTitle")
     }
 }
 
